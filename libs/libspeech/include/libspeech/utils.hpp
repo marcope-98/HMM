@@ -1,0 +1,4 @@
+#ifndef LIBSPEECH_UTILS_HP
+#define LIBSPEECH_UTILS_HP
+
+#endif
