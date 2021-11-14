@@ -1,6 +1,5 @@
 #include "../include/libspeech/AudioFile.hpp"
-#include <gsl/span>
-#include <cmath>
+
 AudioFile::AudioFile(const std::string &filename)
 {
     m_filename = filename;

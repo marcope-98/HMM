@@ -16,3 +16,10 @@ This work is inspired by the KTH course "EQ2340: Pattern Recognition and Machine
     - libspeech/AudioFile.xpp, misplaced in the current folder structure. In the future, it might get moved to a separate library directory
     - libspeech/AudioFile.xpp, too naive. It just reads the wav file in binary mode 4 or 2 bytes at a time.
     - libspeech/AudioFile.xpp, sketchy casting from char to uintxx_t. In contrast with c++ core guideline.
+
+# Dependencies:
+    - OpenCV
+
+# Compiler testes:
+    - GCC 7.5.0
+    - Clang 6.0.0
