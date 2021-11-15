@@ -13,14 +13,14 @@
 
 struct RIFF
 {
-    std::string chunkID = "xxxx";
+    std::array<char, 4> chunkID;
     uint32_t chunkSize;
-    std::string format = "xxxx";
+    std::array<char, 4> format;
 };
 
 struct FMT
 {
-    std::string subchunk1ID = "xxxx";
+    std::array<char, 4> subchunk1ID;
     uint32_t subchunk1Size;
     uint16_t audioFormat;
     uint16_t numChannels;
@@ -32,7 +32,7 @@ struct FMT
 
 struct DATA
 {
-    std::string subchunk2ID = "xxxx";
+    std::array<char, 4> subchunk2ID;
     uint32_t subchunk2Size;
     std::vector<int16_t> channel1;
 };
@@ -50,6 +50,7 @@ public:
     explicit AudioFile(const std::string &);
     void printsummary();
     void plot(cv::Mat*);
+    void print(const std::array<char,4>&);
 };
 
 #endif
