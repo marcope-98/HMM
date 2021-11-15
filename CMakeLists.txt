@@ -14,18 +14,18 @@ endif()
 set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O0")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 add_executable(${PROJECT_NAME} ${SOURCE})
 find_package(OpenCV REQUIRED)
-
+find_package(ROOT REQUIRED)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I${ROOT_INCLUDE_DIRS}")
 foreach(LIBRARY ${LIBRARIES})
     add_subdirectory("${LIBRARIES_DIR}/${LIBRARY}")
 endforeach(LIBRARY)
 target_link_libraries(${PROJECT_NAME} 
     PRIVATE 
-        ${LIBRARIES} ${OpenCV_LIBS}
+        ${LIBRARIES} ${OpenCV_LIBS} ${ROOT_LIBRARIES}
         )
-        
 #[=[
 macro(print_all_variables)
     message(STATUS "print_all_variables------------------------------------------{")

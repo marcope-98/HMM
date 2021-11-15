@@ -2,14 +2,4 @@
 #define LIBSPEECH_SOUNDCLIP_HPP
 
 
-class SoundClip
-{
-private:
-
-public:
-
-};
-
-
-
 #endif

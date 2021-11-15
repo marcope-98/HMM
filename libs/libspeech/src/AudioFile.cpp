@@ -1,5 +1,5 @@
 #include "../include/libspeech/AudioFile.hpp"
-#include <cmath>
+
 AudioFile::AudioFile(const std::string &filename)
 {
     m_filename = filename;
@@ -50,19 +50,36 @@ void AudioFile::printsummary()
 void AudioFile::plot(cv::Mat *image)
 {
     const double increment = 1 / double(m_FmtSubChunk.sampleRate);
-    const double duration = m_DataSubChunk.subchunk2Size*increment/2.;
+    const double duration = m_DataSubChunk.subchunk2Size * increment / 2.;
     const int x = (*image).rows; // 720
     const int y = (*image).cols; // 1024
-    const double scale = y/duration;
+    const double scale = y / duration;
     std::vector<cv::Point> imagePoints;
     const int elem_max = *std::max_element(m_DataSubChunk.channel1.begin(), m_DataSubChunk.channel1.end());
     std::for_each(m_DataSubChunk.channel1.begin(), m_DataSubChunk.channel1.end(),
                   [i = 0., &increment, &elem_max, &x, &imagePoints, &scale](const int16_t &p) mutable
                   {
-                      imagePoints.emplace_back(cv::Point(i * scale, p*0.5*x / elem_max  + 0.5*x));
+                      imagePoints.emplace_back(cv::Point(i * scale, p * 0.5 * x / elem_max + 0.5 * x));
                       i += increment;
                   });
-    
+
     cv::polylines(*image, imagePoints, false, cv::Scalar(255, 0, 0, 0.0), 1, 8, 0);
     cv::flip(*image, *image, 0);
+}
+
+void AudioFile::ROOT_plot()
+{
+    const double increment = 1 / double(m_FmtSubChunk.sampleRate);
+    std::vector<double> d_channel1;
+    std::vector<double> time(m_DataSubChunk.channel1.size());
+
+    std::for_each(m_DataSubChunk.channel1.begin(), m_DataSubChunk.channel1.end(),
+                  [&](const int16_t &t)
+                  { d_channel1.emplace_back(double(t)); });
+    std::generate(time.begin(), time.end(),
+                  [&increment, n = -increment]() mutable
+                  { return n += increment; });
+    TGraph graph(Int_t(time.size()), &(time[0]), &(d_channel1[0]));
+
+    graph.DrawClone("APE");
 }
