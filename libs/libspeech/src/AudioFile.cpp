@@ -12,7 +12,7 @@ AudioFile::AudioFile(const std::string &filename)
     m_DataSubChunk.channel1.reserve(m_DataSubChunk.subchunk2Size);
     while (wavfile.read((char *)c, 2))
     {
-        m_DataSubChunk.channel1.emplace_back(*(uint16_t *)c);
+        m_DataSubChunk.channel1.emplace_back(*(int16_t *)c);
     }
     wavfile.close();
 }
@@ -72,14 +72,15 @@ void AudioFile::ROOT_plot()
     const double increment = 1 / double(m_FmtSubChunk.sampleRate);
     std::vector<double> d_channel1;
     std::vector<double> time(m_DataSubChunk.channel1.size());
-
+/*
     std::for_each(m_DataSubChunk.channel1.begin(), m_DataSubChunk.channel1.end(),
                   [&](const int16_t &t)
                   { d_channel1.emplace_back(double(t)); });
+                  */
     std::generate(time.begin(), time.end(),
                   [&increment, n = -increment]() mutable
                   { return n += increment; });
-    TGraph graph(Int_t(time.size()), &(time[0]), &(d_channel1[0]));
+    TGraph graph(Int_t(time.size()), &(time[0]), &(m_DataSubChunk.channel1[0]));
 
     graph.DrawClone("APE");
 }

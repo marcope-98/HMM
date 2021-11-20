@@ -7,16 +7,15 @@ set(LIBRARY_NAME
 set(LIBRARY_HEADERS_DIR
         include/${LIBRARYNAME})
 set(LIBRARY_HEADERS
+        ${LIBRARY_HEADERS_DIR}/AudioFile.hpp
         ${LIBRARY_HEADERS_DIR}/SoundClip.hpp
-        ${LIBRARY_HEADERS_DIR}/utils.hpp
-        ${LIBRARY_HEADERS_DIR}/AudioFile.hpp)
+        ${LIBRARY_HEADERS_DIR}/utils.hpp)
 set(LIBRARY_SOURCE_DIR
         src)
 set(LIBRARY_SOURCE
+        ${LIBRARY_SOURCE_DIR}/AudioFile.cpp
         ${LIBRARY_SOURCE_DIR}/SoundClip.cpp
-        ${LIBRARY_SOURCE_DIR}/utils.cpp
-        ${LIBRARY_SOURCE_DIR}/AudioFile.cpp)
-
+        ${LIBRARY_SOURCE_DIR}/utils.cpp)
 
 project(${PROJECT_NAME})
 

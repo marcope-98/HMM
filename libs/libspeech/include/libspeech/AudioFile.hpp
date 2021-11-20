@@ -36,8 +36,8 @@ struct DATA
 {
     std::array<char, 4> subchunk2ID;
     uint32_t subchunk2Size;
-    std::vector<int16_t> channel1;
-    //std::vector<double> channel1;
+    //std::vector<int16_t> channel1;
+    std::vector<double> channel1;
 };
 
 class AudioFile
