@@ -28,10 +28,13 @@ foreach(LIBRARY ${LIBRARIES})
 add_subdirectory("${LIBRARIES_DIR}/${LIBRARY}")
 endforeach(LIBRARY)
 add_executable(${PROJECT_NAME} ${SOURCE} ${HEADER})
+target_include_directories(${PROJECT_NAME} PRIVATE include)
 target_link_libraries(${PROJECT_NAME} 
     PRIVATE 
         ${LIBRARIES} ${OpenCV_LIBS} ${ROOT_LIBRARIES} Eigen3::Eigen
         )
+enable_testing()
+add_subdirectory(tests)
 #message(${ROOT_LIBRARIES})
 #[=[
 macro(print_all_variables)

@@ -10,7 +10,6 @@
 #include <opencv2/core.hpp>    // cv::*
 #include <opencv2/imgproc.hpp> // image manipulation
 #include <opencv2/highgui.hpp>
-#include "TCanvas.h"
 #include "TGraph.h"
 
 struct RIFF

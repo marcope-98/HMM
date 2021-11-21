@@ -7,5 +7,6 @@
 #include "TCanvas.h"
 #include "libspeech/AudioFile.hpp"
 #include "libspeech/SoundClip.hpp"
+#include "libspeech/FFT_Windows.hpp"
 
 #endif

@@ -6,6 +6,7 @@
 #include "AudioFile.hpp"
 #include "TCanvas.h"
 #include "TGraph.h"
+
 class SoundClip
 {
 private:
@@ -16,11 +17,10 @@ private:
     std::vector<double> m_data;
 
 public:
-    explicit SoundClip(const std::string&);
+    explicit SoundClip(const std::string &);
     void print();
     void plot();
+    void spectrogram(const double&, const double&, const int&);
 };
-
-
 
 #endif
