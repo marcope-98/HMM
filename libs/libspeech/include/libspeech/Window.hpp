@@ -18,21 +18,18 @@ enum FFT_WINDOW
     Blackman,        // implemented
     Blackman_Harris, // implemented
     Bohman,          // implemented
-    Chebyshev,       // not yet implemented
     Cosine,          // implemented
     ExactBlackman,   // implemented
     Flattop,         // implemented
-    Gaussian,        // need extra parameter
+    Gaussian,        // implemented
     Hamming,         // implemented
     Hann,            // implemented
-    Kaiser,          // not yet implemented
     Lanczos,         // implemented
     Nuttall,         // implemented
-    Parzen,          // not yet implemented
+    Parzen,          // implemented
     Rectangular,     // implemented
-    Taylor,          // not yet implemented
     Triangular,      // implemented
-    Tukey,           // need extra parameter
+    Tukey,           // implemented
     Welch            // implemented
 };
 
@@ -57,19 +54,16 @@ public:
     void blackman(std::vector<double> *, const double&);
     void blackman_harris(std::vector<double> *, const double&);
     void bohman(std::vector<double> *, const double&);
-    void chebyshev(std::vector<double> *, const double&);
     void cosine(std::vector<double> *, const double&);
     void exactblackman(std::vector<double> *, const double&);
     void flattop(std::vector<double> *, const double&);
     void gaussian(std::vector<double> *, const double& = 2.5);
     void hamming(std::vector<double> *, const double&);
     void hann(std::vector<double> *, const double&);
-    void kaiser(std::vector<double> *, const double&);
     void lanczos(std::vector<double> *, const double&);
     void nuttall(std::vector<double> *, const double&);
     void parzen(std::vector<double> *, const double&);
     void rectangular(std::vector<double> *, const double&);
-    void taylor(std::vector<double> *, const double&);
     void triangular(std::vector<double> *, const double&);
     void tukey(std::vector<double> *, const double&);
     void welch(std::vector<double> *, const double&);

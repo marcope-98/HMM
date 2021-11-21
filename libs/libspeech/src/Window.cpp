@@ -2,24 +2,21 @@
 
 using fp = void (Window::*)(std::vector<double> *, const double &);
 
-const std::array<fp, 21> lookup_table = {&Window::barthann,
+const std::array<fp, 18> lookup_table = {&Window::barthann,
                                          &Window::bartlett,
                                          &Window::blackman,
                                          &Window::blackman_harris,
                                          &Window::bohman,
-                                         &Window::chebyshev,
                                          &Window::cosine,
                                          &Window::exactblackman,
                                          &Window::flattop,
                                          &Window::gaussian,
                                          &Window::hamming,
                                          &Window::hann,
-                                         &Window::kaiser,
                                          &Window::lanczos,
                                          &Window::nuttall,
                                          &Window::parzen,
                                          &Window::rectangular,
-                                         &Window::taylor,
                                          &Window::triangular,
                                          &Window::tukey,
                                          &Window::welch};
@@ -111,10 +108,7 @@ void Window::bohman(std::vector<double> *result, const double &extra_param)
     ;
 }
 
-// good luck implementing this
-void Window::chebyshev(std::vector<double> *result, const double &extra_param)
-{
-}
+
 
 void Window::cosine(std::vector<double> *result, const double &extra_param)
 {
@@ -160,11 +154,10 @@ void Window::gaussian(std::vector<double> *result, const double &alpha)
     (*result).resize(m_length);
     double sigma = double(m_length - 1) / (2. * alpha);
     std::vector<double> x(m_length);
-    double increment = double(m_length -1) / double(m_length - 1);
     double init = double(m_length - 1) / 2.;
-    std::generate(x.begin(), x.end(), [n = -init - increment, &increment]() mutable
+    std::generate(x.begin(), x.end(), [n = -init - 1.]() mutable
                   {
-                      n += increment;
+                      n++;
                       return n;
                   });
     double arg = -1. / (2. * pow(sigma, 2.));
@@ -195,10 +188,7 @@ void Window::hann(std::vector<double> *result, const double &extra_param)
                   });
 }
 
-// need to think how to include shapefactor
-void Window::kaiser(std::vector<double> *result, const double &extra_param)
-{
-}
+
 
 void Window::lanczos(std::vector<double> *result, const double &extra_param)
 {
@@ -226,6 +216,29 @@ void Window::nuttall(std::vector<double> *result, const double &extra_param)
 
 void Window::parzen(std::vector<double> *result, const double &extra_param)
 {
+    (*result).resize(m_length);
+    std::vector<double> x(m_length);
+    double init = double(m_length - 1) / 2.;
+
+    std::generate(x.begin(), x.end(), [n = -init - 1.]() mutable
+                  {
+                      n++;
+                      return n;
+                  });
+    double arg = double(m_length) / 2.;
+    std::transform(x.begin(), x.end(), (*result).begin(), [&arg, this](const double &t)
+                   {
+                       double s = std::abs(t);
+                       double temp = s / arg;
+                       if (s >= 0. && s <= double(m_length - 1) / 4.)
+                       {
+                           return 1. - 6. * pow(temp, 2.) + 6. * pow(temp, 3.);
+                       }
+                       else
+                       {
+                           return 2. * pow(1 - temp, 3.);
+                       }
+                   });
 }
 
 void Window::rectangular(std::vector<double> *result, const double &extra_param)
@@ -234,10 +247,7 @@ void Window::rectangular(std::vector<double> *result, const double &extra_param)
     std::fill((*result).begin(), (*result).end(), 1.);
 }
 
-// need to think how to include cosine factor
-void Window::taylor(std::vector<double> *result, const double &extra_param)
-{
-}
+
 
 void Window::triangular(std::vector<double> *result, const double &extra_param)
 {
@@ -264,8 +274,32 @@ void Window::triangular(std::vector<double> *result, const double &extra_param)
     (*result).insert((*result).end(), (*result).rbegin() + (m_length % 2), (*result).rend());
 }
 
-void Window::tukey(std::vector<double> *result, const double &extra_param)
+void Window::tukey(std::vector<double> *result, const double &r)
 {
+    (*result).resize(m_length);
+    std::vector<double> x(m_length);
+    double increment = 1. / double(m_length-1);
+    std::generate(x.begin(), x.end(), [n = -increment, &increment]() mutable
+                  {
+                      n += increment;
+                      return n;
+                  });
+    double arg = r / 2.;
+    std::transform(x.begin(), x.end(), (*result).begin(), [&arg](const double &t)
+                   {
+                       if (t >= 0 && t < arg)
+                       {
+                           return 0.5 * (1 + cos((M_PI / arg) * (t - arg)));
+                       }
+                       else if (t >= 1. - arg && t <= 1.)
+                       {
+                           return 0.5 * (1 + cos((M_PI / arg) * (t - 1. + arg)));
+                       }
+                       else
+                       {
+                           return 1.;
+                       }
+                   });
 }
 
 void Window::welch(std::vector<double> *result, const double &extra_param)
