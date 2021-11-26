@@ -1,5 +1,5 @@
-#ifndef FFT_WINDOWS_HPP
-#define FFT_WINDOWS_HPP
+#ifndef WINDOW_HPP
+#define WINDOW_HPP
 #include <iostream>
 #include <vector>
 #include <cmath>

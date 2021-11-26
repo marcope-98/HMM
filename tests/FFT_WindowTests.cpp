@@ -33,18 +33,6 @@ TEST_CASE("LibspeechTests", "[testLibspeech]")
         std::vector<double> ground = {0.0000, 0.0001, 0.0008, 0.0028, 0.0066, 0.0128, 0.0219, 0.0344, 0.0505, 0.0707, 0.0952, 0.1239, 0.1571, 0.1946, 0.2363, 0.2818, 0.3309, 0.3829, 0.4375, 0.4938, 0.5513, 0.6090, 0.6661, 0.7218, 0.7750, 0.8248, 0.8703, 0.9104, 0.9442, 0.9707, 0.9892, 0.9988, 0.9988, 0.9892, 0.9707, 0.9442, 0.9104, 0.8703, 0.8248, 0.7750, 0.7218, 0.6661, 0.6090, 0.5513, 0.4938, 0.4375, 0.3829, 0.3309, 0.2818, 0.2363, 0.1946, 0.1571, 0.1239, 0.0952, 0.0707, 0.0505, 0.0344, 0.0219, 0.0128, 0.0066, 0.0028, 0.0008, 0.0001, 0.0000};
         REQUIRE_THAT(ground, Catch::Approx(test.getdata()).margin(0.0001));
     }
-    SECTION("COSINE")
-    {
-        Window test(Cosine, 64);
-        std::vector<double> ground = {};
-        REQUIRE_THAT(ground, Catch::Approx(test.getdata()).margin(0.0001));
-    }
-    SECTION("EXACTBLACKMAN")
-    {
-        Window test(ExactBlackman, 64);
-        std::vector<double> ground = {};
-        REQUIRE_THAT(ground, Catch::Approx(test.getdata()).margin(0.0001));
-    }
     SECTION("FLATTOP")
     {
         Window test(Flattop, 64);
@@ -67,12 +55,6 @@ TEST_CASE("LibspeechTests", "[testLibspeech]")
     {
         Window test(Hann, 64);
         std::vector<double> ground = {0.0000, 0.0025, 0.0099, 0.0222, 0.0393, 0.0609, 0.0869, 0.1170, 0.1509, 0.1883, 0.2287, 0.2719, 0.3173, 0.3646, 0.4132, 0.4626, 0.5125, 0.5622, 0.6113, 0.6592, 0.7056, 0.7500, 0.7919, 0.8308, 0.8665, 0.8986, 0.9266, 0.9505, 0.9698, 0.9845, 0.9944, 0.9994, 0.9994, 0.9944, 0.9845, 0.9698, 0.9505, 0.9266, 0.8986, 0.8665, 0.8308, 0.7919, 0.7500, 0.7056, 0.6592, 0.6113, 0.5622, 0.5125, 0.4626, 0.4132, 0.3646, 0.3173, 0.2719, 0.2287, 0.1883, 0.1509, 0.1170, 0.0869, 0.0609, 0.0393, 0.0222, 0.0099, 0.0025, 0.0000};
-        REQUIRE_THAT(ground, Catch::Approx(test.getdata()).margin(0.0001));
-    }
-    SECTION("LANCZOS")
-    {
-        Window test(Lanczos, 64);
-        std::vector<double> ground = {};
         REQUIRE_THAT(ground, Catch::Approx(test.getdata()).margin(0.0001));
     }
     SECTION("NUTTALL")

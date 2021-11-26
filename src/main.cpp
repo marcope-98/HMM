@@ -2,10 +2,10 @@
 
 int main(int argc, char **argv)
 { 
-    Window test(Triangular, 64);
+    //Window test(Triangular, 64);
     
     //std::cout <<test.getdata()[16] << std::endl;
-    /*
+    
     AudioFile a("../data/male.wav");
     a.printsummary();
     //    cv::Mat image(720, 1024, CV_8UC3, cv::Scalar(255, 255, 255));
@@ -16,7 +16,7 @@ int main(int argc, char **argv)
     TApplication app("ROOT Application", &argc, argv);
     a.ROOT_plot();
     app.Run();
-    */
+    
    //Window testw;
    //std::vector<double> test = testw.rectangular(6);
    //std::for_each(test.begin(), test.end(), [](const double &t){std::cout << t <<"\n";});
@@ -34,15 +34,3 @@ int main(int argc, char **argv)
     app.Run();*/
     return 0;
 }
-
-
-/*
-TESTS FAILED:
-BLACKMAN
-BOHMAN
-FLATTOP
-NUTTALL
-TRAINGULAR
-
-
-*/

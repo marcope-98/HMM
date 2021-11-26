@@ -4,6 +4,8 @@
 #include <vector>
 #include <iostream>
 #include "AudioFile.hpp"
+#include "Window.hpp"
+#include "utils.hpp"
 #include "TCanvas.h"
 #include "TGraph.h"
 
@@ -20,7 +22,7 @@ public:
     explicit SoundClip(const std::string &);
     void print();
     void plot();
-    void spectrogram(const double&, const double&, const int&);
+    void spectrogram(const double&, const double&, const int&,const FFT_WINDOW&);
 };
 
 #endif

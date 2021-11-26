@@ -3,6 +3,6 @@
 #include <cmath>
 
 
-double sinc(const double&);
-
+constexpr double sinc(const double&);
+int nextpow2(const int&);
 #endif
